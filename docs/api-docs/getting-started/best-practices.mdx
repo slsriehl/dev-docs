@@ -34,16 +34,16 @@ Examples of non-breaking changes include:
 We encourage you to write robust, resilient code that will not break or leak memory if an endpoint begins to return additional fields.
 
 ## Use webhooks to listen for changes
-To keep data in your application up-to-date, [webhooks](/api-docs/getting-started/webhooks/about-webhooks) provide a great alternative to periodic API polling. Use an [OAuth API account](/api-docs/getting-started/api-accounts) to register and subscribe to webhook-enabled events relevant to your application.
+To keep data in your application up-to-date, [webhooks](/api-docs/getting-started/webhooks/about-webhooks) should be used in place of periodic API polling. Note: Periodic polling does not scale well as your store grows. Use an [OAuth API account](/api-docs/getting-started/api-accounts) to register and subscribe to webhook-enabled events relevant to your application.
 
 When an event your app is listening for occurs, BigCommerce sends a payload with a few identifying details relevant to the event. See a list of [webhook events and their payloads](/api-docs/store-management/webhooks/webhook-events). Use the payload data points to make subsequent API requests for more details.
 
-### Avoid polling the Storefront Cart API 
+### Avoid polling the Storefront Cart API (I'm wondering if we need to change this to just be `avoid polling` and incorperate the webhooks section here)
 Client-side applications should avoid polling the [Storefront Cart API](/api-reference/cart-checkout/storefront-cart-api) on interval. Thousands of browsers could poll the Storefront Cart API at any given time, causing a significant load increase to BigCommerce's servers. We may take action against a store using this practice to prevent service interruptions to other stores.
 
 Consider writing a server-side application to subscribe to the [Cart Webhook](/api-docs/store-management/webhooks/webhook-events#carts) as an alternative to polling the Storefront Cart API, and only query the Storefront Cart API as a response to user input. Storing cart information in the browser cache is an alternative method for keeping cart information up to date across browser tabs.
 
-## Thread API requests
+## Thread API requests (We should consider either flat-out removing this and saying do not thread, or putting a big disclaimer that its a bad idea with write traffic and can get you in trouble)
 
 You can use threaded requests in order to quickly update information in an API. Threaded requests allow you to send multiple requests at one time. They can come from a different open connection or multiple requests to the same resource.
 

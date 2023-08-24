@@ -140,7 +140,11 @@ The body of a JSON request is an object containing a set of key-value pairs. A s
 
 HTTP response header names are case-insensitive; see the [HTTP specification on field names](https://www.rfc-editor.org/rfc/rfc9110.html#name-field-names) for more information. For example, your application may receive `x-rate-limit-requests-left` rather than `X-Rate-Limit-Requests-Left`, so plan your implementation accordingly. Most open source HTTP clients treat headers with the appropriate case insensitivity.
 
+ -- Testing with v3 catalog/products endpoint on an employee sandbox: Headers returned
+Content-type, Transfer-encoding, connection, vary, x-request-id, content-encoding, x-rate-limit (requests-left, time-reset-ms, requests-quota, time-window-ms)
 
+-- testing v2 orders endpoint on employee sandbox: Headers returned
+Content-type, transfer-encoding, connection, vary, x-request-id, last-modified (not in v3), content-encoding, x-bc-store-version (not in v3, not something we should be returning), x-bc-apilimit-remaining (not sure why we don't also provide this on v3), x-rate-limit headers, strict-transport-security
 | Header | Possible Values | Description | Example |
 |:-------|:----------------|:------------|:--------|
 | `Date` | An <a href="http://tools.ietf.org/html/rfc2822#section-3.3" target="_blank">RFC 2822</a> date. | The date the response was sent. | `Tue, 15 Nov 2011 12:45:26 GMT` |
@@ -158,7 +162,7 @@ HTTP response header names are case-insensitive; see the [HTTP specification on 
 | `X-Rate-Limit-Time-Reset-Ms` | number | Shows how many milliseconds are remaining in the window. In this case, 3000 milliseconds – so, 3000 milliseconds after this request, the API quota will be refreshed. |`30000 `|
 | `X-Rate-Limit-Time-Window-Ms` | number | Shows the size of your current rate-limiting window. | `9762` |
 
-#### Response content type
+#### Response content type (What is this, does it even still exist? Probably good to get with the api-platform team to check)
 When requesting a resource that returns a body, specify the type of content you want to receive with the `Accept` header. Alternatively, you can supply an extension to the resource you're requesting.
 
 The priorities with which you can process these methods are:
@@ -212,7 +216,7 @@ GET https://api.bigcommerce.com/stores/{{store_hash}}/v3/catalog/categories/{{ca
 }
 ```
 
-## Support
+## Support (I wonder if its a good idea to add a blurb here about ent/partners getting to contact support for api-related questions and have them answered)
 
 ### Developer community
 The [developer community](https://support.bigcommerce.com/s/group/0F913000000HLjECAW/bigcommerce-developers) is a great place to get help from other developers who work on the BigCommerce platform. If you have BigCommerce-specific questions, this online forum is the best place to ask. It's also an excellent place for beginners to get assistance.

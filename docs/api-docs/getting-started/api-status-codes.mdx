@@ -18,7 +18,7 @@ This article covers [REST](#rest-api-http-status-codes) and [GraphQL](#graphql-a
 |:----:|:-----|:--------|
 | **200** | **OK** | For successful `GET` and `PUT` requests. |
 | **201** | **Created** | For a successful `POST` request. |
-| **202** | **Accepted** | For a request that resulted in a scheduled task being created to perform the actual request. |
+| **202** | **Accepted** | For a request that resulted in a scheduled task being created to perform the actual request. | (do we ever return this status code?)
 | **204** | **No Content** | For a successful request that produced no response (such as `DELETE` requests). |
 | **207** | **Multi-Status** | Multiple operations have taken place and the status for each operation can be viewed in the body of the response. Typically indicates that a partial failure has occurred.|
 
@@ -48,7 +48,7 @@ This article covers [REST](#rest-api-http-status-codes) and [GraphQL](#graphql-a
 | **415** | **Unsupported Media Type** | Returned due to issues with the `Content-Type` header.  |
 | **422** | **Missing or Invalid Data** | The request cannot be processed either because it omitted required fields or because it contained invalid data. See the response for more details. |
 | **423** | **Locked Status Code** | The requested resource is currently locked and unavailable.|
-| **429** | **Too Many Requests** | When an OAuth client exceeds the [rate limit](/api-docs/getting-started/best-practices#best-practices_rate-limits) for API requests to a store. |
+| **429** | **Too Many Requests** | When an OAuth client exceeds the [rate limit](/api-docs/getting-started/best-practices#best-practices_rate-limits) for API requests to a store. | (We may want to be a bit more verbose here. This can occur when we impose the limit on them, not just our system. Maybe something about this existing to protect the platform, and engineers may also impose artificial restrictions due to malfeasance. We also might want to drop a thing about "if we are throwing these at you, reevaluate what you are doing" here alongside the updated rate limiting docs)
 
 ### 5xx Server Error
 
@@ -56,7 +56,7 @@ This article covers [REST](#rest-api-http-status-codes) and [GraphQL](#graphql-a
 
 | Code | Text | Purpose |
 |:----:|:-----|:--------|
-| **500** | **Internal Server Error** | When an error has occurred within the API. |
+| **500** | **Internal Server Error** | When an error has occurred within the API. | (not sure I like this just being this vague. Merchants can and do cause 500s with their calls, typically going too fast with writes. Maybe including this in the "how to troubleshoot" area)
 | **501** | **Not Implemented** | When a request method is sent that is not supported by the API (e.g., `TRACE`, `PATCH`). |
 | **503** | **Service Unavailable** | When the store is “Down for Maintenance,” being upgraded to a new version, or is suspended due to administrative action or a billing issue.|
 | **507** | **Insufficient Storage** | When the store has reached a limitation for the resource, according to their [BigCommerce plan](https://support.bigcommerce.com/s/article/Pricing#plan-features) (e.g., 500-product limit). |

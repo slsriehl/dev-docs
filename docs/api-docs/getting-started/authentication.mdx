@@ -23,7 +23,7 @@ The following sections describe the two authentication schemes we use that rely 
 ### Access tokens
 
 <Callout type="info">
-  Legacy API accounts used HTTP basic authentication. They are no longer available to new stores. For more information, see [API Accounts: Migrating from legacy to OAuth](/api-docs/getting-started/api-accounts#migrating-from-legacy-to-oauth).
+  Legacy API accounts used HTTP basic authentication. They are no longer being created for any reason. We strongly recommend updating any existing apps or connections utilizing legacy API authentication to update to Oauth. For more information, see [API Accounts: Migrating from legacy to OAuth](/api-docs/getting-started/api-accounts#migrating-from-legacy-to-oauth).
 </Callout>
 
 Most of our REST endpoints and GraphQL Admin API endpoints use the `X-Auth-Token` header to authenticate to BigCommerce servers. For more about the APIs that do **NOT** use the `X-Auth-Token` header, consult this article's sections on [dynamic tokens](#dynamic-tokens) and [same-origin CORS authentication](#same-origin-cors-authentication).
@@ -85,7 +85,7 @@ The following tabs contain examples of how to authenticate requests by passing a
   </Tab>
 </Tabs>
 
-### Client ID
+### Client ID (If client-id is no longer required, why does this section exist?)
 
 Another **stable token**-based scheme involves mutual authentication. The requesting app identifies itself by sending an API account's client ID as a query parameter, and our servers return a BigCommerce-generated JSON web token, or _JWT_, which securely encrypts merchant data. The app can decode the JWT to view the response. For example, the Current Customer API's JWT payload identifies the currently signed-in customer.
 
